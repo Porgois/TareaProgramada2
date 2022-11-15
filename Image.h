@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 
 struct Color {
 	float r, g, b;
@@ -9,26 +10,28 @@ struct Color {
 	~Color();
 
 };
+
 class Image {
 public:
 	Image(int width, int height);
+	Image();
 	~Image();
 
 	Color GetColor(int x, int y) const;
 	void SetColor(const Color& color, int x, int y);
 	void SetNegativeColor(const Color& color, int x, int y);
 
-	void Import(const char* path);
-	void Export(const char* path) const;
+	void Import(std::string path);
+	void Export(std::string path) const;
 	int getHeight();
 	int getWidth();
+	std::vector<Color> getColors();
 
 private:
 	int m_width;
 	int m_height;
 	std::vector<Color> m_colors;
 };
-
 
 //Referencias:
 //1) https://www.youtube.com/watch?v=vqT5j38bWGg&ab_channel=DesignedbyHugo

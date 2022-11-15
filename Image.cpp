@@ -21,6 +21,12 @@ Image::Image(int width, int height)
 {
 }
 
+Image::Image()
+	:m_width(0), m_height(0)
+{
+	
+}
+
 Image::~Image()
 {
 }
@@ -39,17 +45,17 @@ void Image::SetColor(const Color& color, int x, int y)
 
 void Image::SetNegativeColor(const Color& color, int x, int y)
 {
-	m_colors[y * m_width + x].r = 255 -color.r;
-	m_colors[y * m_width + x].g = 255 -color.g;
+	m_colors[y * m_width + x].r = 255 - color.r;
+	m_colors[y * m_width + x].g = 255 - color.g;
 	m_colors[y * m_width + x].b = 255 - color.b;
 }
 
-void Image::Import(const char* path) 
+void Image::Import(std::string path)
 {
 	std::ifstream file;
 	file.open(path, std::ios::in | std::ios::binary);
 
-	if (!file.is_open()){
+	if (!file.is_open()) {
 		std::cout << "The file could not be opened.\n";
 		return;
 	}
@@ -76,16 +82,16 @@ void Image::Import(const char* path)
 	m_height = informationHeader[8] + (informationHeader[9] << 8) + (informationHeader[10] << 16) + (informationHeader[11] << 24);
 
 	m_colors.resize(m_width * m_height);
+
 	const int paddingAmount = ((4 - (m_width * 3) % 4) % 4);
 
 	for (int y = 0; y < m_height; y++) {
 		for (int x = 0; x < m_width; x++) {
 			unsigned char color[3];
 			file.read(reinterpret_cast<char*>(color), 3);
-
 			m_colors[y * m_width + x].r = static_cast<float>(color[2]) / 255.0f;
-			m_colors[y * m_width + x].g = static_cast<float>(color[2]) / 255.0f;
-			m_colors[y * m_width + x].b = static_cast<float>(color[2]) / 255.0f;
+			m_colors[y * m_width + x].g = static_cast<float>(color[1]) / 255.0f;
+			m_colors[y * m_width + x].b = static_cast<float>(color[0]) / 255.0f;
 		}
 		file.ignore(paddingAmount);
 	}
@@ -93,7 +99,7 @@ void Image::Import(const char* path)
 	std::cout << "File succesfuly read.\n";
 }
 
-void Image::Export(const char* path) const
+void Image::Export(std::string path) const
 {
 	std::ofstream file;
 
@@ -228,6 +234,11 @@ int Image::getHeight()
 int Image::getWidth()
 {
 	return m_width;
+}
+
+std::vector<Color> Image::getColors()
+{
+	return m_colors;
 }
 
 //Referencias:
