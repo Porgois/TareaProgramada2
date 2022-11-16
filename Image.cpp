@@ -89,9 +89,9 @@ void Image::Import(std::string path)
 		for (int x = 0; x < m_width; x++) {
 			unsigned char color[3];
 			file.read(reinterpret_cast<char*>(color), 3);
-			m_colors[y * m_width + x].r = static_cast<float>(color[2]) / 255.0f;
-			m_colors[y * m_width + x].g = static_cast<float>(color[1]) / 255.0f;
-			m_colors[y * m_width + x].b = static_cast<float>(color[0]) / 255.0f;
+			m_colors[y * m_width + x].r = static_cast<float>(color[2]);
+			m_colors[y * m_width + x].g = static_cast<float>(color[1]); 
+			m_colors[y * m_width + x].b = static_cast<float>(color[0]); 
 		}
 		file.ignore(paddingAmount);
 	}
@@ -210,9 +210,9 @@ void Image::Export(std::string path) const
 
 	for (int y = 0; y < m_height; y++) {
 		for (int x = 0; x < m_width; x++) {
-			unsigned char r = static_cast<unsigned char>(GetColor(x, y).r * 255.0f);
-			unsigned char g = static_cast<unsigned char>(GetColor(x, y).g * 255.0f);
-			unsigned char b = static_cast<unsigned char>(GetColor(x, y).b * 255.0f);
+			unsigned char r = static_cast<unsigned char>(GetColor(x, y).r);
+			unsigned char g = static_cast<unsigned char>(GetColor(x, y).g);
+			unsigned char b = static_cast<unsigned char>(GetColor(x, y).b);
 
 			unsigned char color[] = { b, g ,r };
 
@@ -238,7 +238,7 @@ int Image::getWidth()
 
 std::vector<Color> Image::getColors()
 {
-	return this->m_colors;
+	return m_colors;
 }
 
 //Referencias:

@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-//VARIABLES PARA COMUNICACION (por determinar...)
+//VARIABLES PARA COMUNICACION CON ENSAMBLADOR
 std::vector<Color> vacio;
 std::vector<char> pixels;
 
@@ -109,23 +109,18 @@ void read() {
 	std::vector<Color> colors;
 	ask(&path, &file_name);
 
-	Image copy;
-	copy.Import(path + file_name + ".bmp");
-
-	int height = copy.getHeight();
-	int width = copy.getWidth();
-
-	colors = copy.getColors();
-
-	std::cout << "Colors sizee: " << colors.size() << "\n";
-
+	Image image;
+	image.Import(path + file_name + ".bmp");
+	colors = image.getColors();
+	
 	int size = (colors.size() * 3);
 	pixels.resize(size);
 	
+	//Traductor para NASM <---> C++.
 	translateNasm(pixels, colors);
 	translateCPP(pixels, vacio);
 
-	copy.Export(path  + file_name + "_edited.bmp");
+	image.Export(path  + file_name + "_edited.bmp");
 }
 
 int main() {
