@@ -1,11 +1,14 @@
+#pragma once
+
 #include "Image.h"
 #include <iostream>
 #include <string>
 #include <vector>
 
-int* arr;
-std::vector<Color> colores;
+//VARIABLES PARA COMUNICACION (por determinar...)
 
+
+//Algoritmo para generar imagen "aleatoria".
 void random(int height, int width) //creates an image with random colors.
 {
 
@@ -20,6 +23,7 @@ void random(int height, int width) //creates an image with random colors.
 	image.Export("C:/Users/Matias/Desktop/imageR.bmp");
 }
 
+//Este es un algoritmo de prueba.
 void negative(int height, int width, Image* image) //creates an image with inverted colors.
 {
 	for (int y = 0; y < height; y++) {
@@ -29,53 +33,58 @@ void negative(int height, int width, Image* image) //creates an image with inver
 	}
 }
 
-void translateNasm() {
-	int size = colores.size() * 3;
+//Algoritmos Traduccion.
+void translateNasm(std::vector<int>& pixels, std::vector<Color>& colors)
+{
+	int size = pixels.size();
 	int counter = 0;
 	int tres = 0;
 
-	std::cout << "Creando arreglo integers... para NASM\n";
-	for (int i = 0; i < size; i++) 
+	std::cout << "Creando arreglo integers...\n";
+
+	for (int i = 0; i < 1; i++) 
 	{
 		switch (tres) 
 		{
 			case 0:
-				arr[i] = static_cast<int>(colores[counter].r);
+				pixels[i] = static_cast<int>(colors[counter].r);
 				tres++;
 				break;
 			case 1:
-				arr[i] = static_cast<int>(colores[counter].g);
+				pixels[i] = static_cast<int>(colors[counter].g);
 				tres++;
 				break;
 			case 2:
-				arr[i] = static_cast<int>(colores[counter].b);
+				pixels[i] = static_cast<int>(colors[counter].b);
 				counter++;
 				tres = 0;
 				break;
 		}
 	}
-	std::cout << "Arreglo creado Satisfactoriamente!\n";
+
+	std::cout << "Arreglo creado!\n";
 }
 
-void translateCPP(int arr[], std::vector<Color> &colors, int size) {
-	std::vector<Color> colores;
-	colores.resize(size / 3);
+void translateCPP(std::vector<int>& pixels, std::vector<Color>& colors) {
+	int size = pixels.size();
+	colors.resize(size / 3);
 	int counter = 0;
 	int tres = 0;
 
-	std::cout << "Creando vector colores... para C++\n";
+	std::cout << "Creando vector colores...\n";
+
 	for (int i = 0; i < size; ++i) {
 		switch (tres) {
 			case(0):
-				colores[counter].r = static_cast<float>(arr[i]);
+				colors[counter].r = static_cast<float>(pixels[i]);
 				tres++;
 				break;
 			case(1):
-				colores[counter].g = static_cast<float>(arr[i]);
+				colors[counter].g = static_cast<float>(pixels[i]);
 				tres++;
 				break;
 			case(2):
-				colores[counter].b = static_cast<float>(arr[i]);
+				colors[counter].b = static_cast<float>(pixels[i]);
 				tres = 0;
 				counter++;
 		}
@@ -83,6 +92,7 @@ void translateCPP(int arr[], std::vector<Color> &colors, int size) {
 	std::cout << "Vector creado!" << "\n";
 }
 
+//Preguta ruta y nombre de archivo.
 void ask(std::string* path, std::string* file_name) {
 	std::cout << "Enter path: ";
 	std::cin >> *path;
@@ -91,48 +101,46 @@ void ask(std::string* path, std::string* file_name) {
 	std::cin >> *file_name;
 }
 
+//Lee la imagen y ejecuta los algoritmos principales.
 void read() {
 	std::string path, file_name;
+	std::vector<Color> vacio;
+
+	std::vector<Color> colors;
+	std::vector<int> pixels;
+
 	ask(&path, &file_name);
 
 	Image copy;
 	copy.Import(path + file_name + ".bmp");
+
 	int height = copy.getHeight();
 	int width = copy.getWidth();
+
+	colors = copy.getColors();
+
+	int size = (colors.size() * 3);
+	pixels.resize(size);
 	
-	std::cout << "Dimensiones Imagen: [" << height << " X " << width << "].\n";
+	translateNasm(pixels, colors);
+	translateCPP(pixels, vacio);
+
 	copy.Export(path  + file_name + "_read.bmp");
 
+	std::cout << "RED_VECTOR: " << vacio[0].r << "\n";
+	std::cout << "RED_ARRAY: " << pixels[0] << "\n";
 }
 
 int main() {
 	read();
 }
 
-//path base para ir a escritorio:
-//C:/Users/(usuario)/Desktop/(nombre).bmp
+/*
+path base para ir a escritorio:
+C:/Users/porgois/Desktop/ [luego digitar nombre de archivo (sin extension)]
 
-//Ejemplo en mi caso:
-//C:/Users/porgois/Desktop/sample.bmp
+Referencias:
+1) https://www.youtube.com/watch?v=vqT5j38bWGg&ab_channel=DesignedbyHugo
+2) https://www.youtube.com/watch?v=NcEE5xmpgQ0&t=56s&ab_channel=DesignedbyHugo
+*/
 
-//copy.Import("C:/Users/porgois/Desktop/sample.bmp");
-
-//int arr[32]; //32 porque es lo que cabe en ymm. 
-	/*
-		en ese array es que se tienen que meter los colores.
-		puede ser como:
-		int arr[32];
-		colores[0].r = arr[0]
-		colores[0].g = arr[1]
-		colores[0].b = arr[2]
-		...
-		hasta llegar a 32.
-
-		SE HACE EL CASTEO DE ESTA FORMA: arr[0] = static_cast<int>(colores[0].r)
-
-		*en esto se basan las funciones de  translateNASM y translateCPP
-	*/
-
-//Referencias:
-//1) https://www.youtube.com/watch?v=vqT5j38bWGg&ab_channel=DesignedbyHugo
-//2) https://www.youtube.com/watch?v=NcEE5xmpgQ0&t=56s&ab_channel=DesignedbyHugo
