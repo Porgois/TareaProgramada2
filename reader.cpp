@@ -6,7 +6,8 @@
 #include <vector>
 
 //VARIABLES PARA COMUNICACION (por determinar...)
-
+std::vector<Color> vacio;
+std::vector<char> pixels;
 
 //Algoritmo para generar imagen "aleatoria".
 void random(int height, int width) //creates an image with random colors.
@@ -34,28 +35,28 @@ void negative(int height, int width, Image* image) //creates an image with inver
 }
 
 //Algoritmos Traduccion.
-void translateNasm(std::vector<int>& pixels, std::vector<Color>& colors)
+void translateNasm(std::vector<char>& pixels, std::vector<Color>& colors)
 {
-	int size = pixels.size();
+	int size = colors.size() * 3;
 	int counter = 0;
 	int tres = 0;
 
 	std::cout << "Creando arreglo integers...\n";
 
-	for (int i = 0; i < 1; i++) 
+	for (int i = 0; i < size; i++) 
 	{
 		switch (tres) 
 		{
 			case 0:
-				pixels[i] = static_cast<int>(colors[counter].r);
-				tres++;
+				pixels[i] = static_cast<char>(colors[counter].r);
+				tres++; 
 				break;
 			case 1:
-				pixels[i] = static_cast<int>(colors[counter].g);
+				pixels[i] = static_cast<char>(colors[counter].g);
 				tres++;
 				break;
 			case 2:
-				pixels[i] = static_cast<int>(colors[counter].b);
+				pixels[i] = static_cast<char>(colors[counter].b);
 				counter++;
 				tres = 0;
 				break;
@@ -65,8 +66,9 @@ void translateNasm(std::vector<int>& pixels, std::vector<Color>& colors)
 	std::cout << "Arreglo creado!\n";
 }
 
-void translateCPP(std::vector<int>& pixels, std::vector<Color>& colors) {
+void translateCPP(std::vector<char>& pixels, std::vector<Color>& colors) {
 	int size = pixels.size();
+
 	colors.resize(size / 3);
 	int counter = 0;
 	int tres = 0;
@@ -104,11 +106,7 @@ void ask(std::string* path, std::string* file_name) {
 //Lee la imagen y ejecuta los algoritmos principales.
 void read() {
 	std::string path, file_name;
-	std::vector<Color> vacio;
-
 	std::vector<Color> colors;
-	std::vector<int> pixels;
-
 	ask(&path, &file_name);
 
 	Image copy;
@@ -119,16 +117,15 @@ void read() {
 
 	colors = copy.getColors();
 
+	std::cout << "Colors sizee: " << colors.size() << "\n";
+
 	int size = (colors.size() * 3);
 	pixels.resize(size);
 	
 	translateNasm(pixels, colors);
 	translateCPP(pixels, vacio);
 
-	copy.Export(path  + file_name + "_read.bmp");
-
-	std::cout << "RED_VECTOR: " << vacio[0].r << "\n";
-	std::cout << "RED_ARRAY: " << pixels[0] << "\n";
+	copy.Export(path  + file_name + "_edited.bmp");
 }
 
 int main() {

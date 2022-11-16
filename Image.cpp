@@ -238,7 +238,7 @@ int Image::getWidth()
 
 std::vector<Color> Image::getColors()
 {
-	return m_colors;
+	return this->m_colors;
 }
 
 //Referencias:
