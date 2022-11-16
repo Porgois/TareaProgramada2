@@ -57,7 +57,7 @@ void Image::Import(std::string path)
 
 	if (!file.is_open()) {
 		std::cout << "The file could not be opened.\n";
-		return;
+		exit(0);
 	}
 
 	const int fileHeaderSize = 14;
@@ -70,7 +70,7 @@ void Image::Import(std::string path)
 	if (fileHeader[0] != 'B' || fileHeader[1] != 'M') {
 		std::cout << "The selected file is not a bitmap image.\n";
 		file.close();
-		return;
+		exit(0);
 	}
 
 	unsigned char informationHeader[informationHeaderSize];
@@ -107,7 +107,7 @@ void Image::Export(std::string path) const
 
 	if (!file.is_open()) {
 		std::cout << "file could not be opened.\n";
-		return;
+		exit(0);
 	}
 
 	unsigned char bmpPad[] = { 0, 0, 0 };
