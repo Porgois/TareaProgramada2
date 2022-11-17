@@ -6,31 +6,28 @@
 #include <vector>
 
 //VARIABLES PARA COMUNICACION CON ENSAMBLADOR
-std::vector<Color> vacio;
 std::vector<char> pixels;
+std::vector<Color> vacio;
 
 //Algoritmo para generar imagen "aleatoria".
 void random(int height, int width) //creates an image with random colors.
 {
-
 	Image image(width, height);
 
 	for (int y = 0; y < height; y++) {
 		for (int x = 0; x < width; x++) {
-			image.SetColor(Color((float)x / (float)width, 1.0f - ((float)x / (float)width), (float)y / (float)height), x, y);
+			image.SetColor(Color({255,0,0}), x, y);
 		}
 	}
-
-	image.Export("C:/Users/Matias/Desktop/imageR.bmp");
+	image.Export("C:/Users/porgois/Desktop/papita.bmp");
 }
 
 //Este es un algoritmo de prueba.
-void negative(int height, int width, Image* image) //creates an image with inverted colors.
+void negative(std::vector<char>& pixeles) //creates an image with inverted colors.
 {
-	for (int y = 0; y < height; y++) {
-		for (int x = 0; x < width; x++) {
-			image->SetNegativeColor(image->GetColor(x, y), x, y);
-		}
+	int size = pixeles.size();
+	for (int i = 0; i < size; i++) {
+		pixeles[i] = 255 - pixeles[i];
 	}
 }
 
@@ -118,13 +115,21 @@ void read() {
 	
 	//Traductor para NASM <---> C++.
 	translateNasm(pixels, colors);
-	translateCPP(pixels, vacio);
 
+	//Filtro (Esto va en NASM)
+	negative(pixels);
+
+	//Traductor para C++ <---> NASM.
+	translateCPP(pixels, vacio);
+	image.getColors() = vacio;
+	
 	image.Export(path  + file_name + "_edited.bmp");
 }
 
 int main() {
-	read();
+	for (int i = 0; i < 3; ++i) {
+		read();
+	}
 }
 
 /*

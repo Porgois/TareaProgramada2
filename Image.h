@@ -8,7 +8,6 @@ struct Color {
 	Color();
 	Color(float r, float g, float b);
 	~Color();
-
 };
 
 class Image {
@@ -19,13 +18,12 @@ public:
 
 	Color GetColor(int x, int y) const;
 	void SetColor(const Color& color, int x, int y);
-	void SetNegativeColor(const Color& color, int x, int y);
-
+	
 	void Import(std::string path);
 	void Export(std::string path) const;
 	int getHeight();
 	int getWidth();
-	std::vector<Color> getColors();
+	std::vector<Color>& getColors();
 
 private:
 	int m_width;

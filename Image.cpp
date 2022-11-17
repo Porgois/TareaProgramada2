@@ -43,13 +43,6 @@ void Image::SetColor(const Color& color, int x, int y)
 	m_colors[y * m_width + x].b = color.b;
 }
 
-void Image::SetNegativeColor(const Color& color, int x, int y)
-{
-	m_colors[y * m_width + x].r = 255 - color.r;
-	m_colors[y * m_width + x].g = 255 - color.g;
-	m_colors[y * m_width + x].b = 255 - color.b;
-}
-
 void Image::Import(std::string path)
 {
 	std::ifstream file;
@@ -236,7 +229,7 @@ int Image::getWidth()
 	return m_width;
 }
 
-std::vector<Color> Image::getColors()
+std::vector<Color>& Image::getColors()
 {
 	return m_colors;
 }
