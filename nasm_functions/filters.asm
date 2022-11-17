@@ -5,14 +5,13 @@ global _brillo
 global _negativo
 global _contraste
 global _espejado
-;global _escalado
-
-section .data
+global _escalado
 
 section .bss
+
 	x resb 1
 	y resb 33
-	z resb 32
+	z resb 35
 
 section .text
 	
@@ -38,20 +37,24 @@ section .text
 	_contraste:
 	
 	vmovups ymm0, [rcx]
-	mov [x], byte 5
-	vpbroadcastb ymm1, [x]
-	vpmuludq ymm2, ymm1, ymm0
-	mov [x], byte 10
-	vpbroadcastb ymm1, [x]
-	vpaddusb ymm2, ymm1, ymm2
-	vmovups [rcx], ymm2
+	
+	mov r8b, 0
+	for:
+	
+	vpaddusb ymm0, ymm0, ymm0
+	
+	inc r8b
+	cmp r8b, 6
+	jl for
+	
+	vmovups [rcx], ymm0
 	ret
 	
 	_espejado:
 	
-	vmovups xmm0, [rdi+15]
-	vmovups [rdi+16], xmm0
-	vmovups ymm0, [rdi]
+	vmovups xmm0, [rcx+15]
+	vmovups [rcx+16], xmm0
+	vmovups ymm0, [rcx]
 	mov r8b, 0
 	mov [y], r8b
 	vpbroadcastb ymm2, [y]
@@ -60,14 +63,27 @@ section .text
 	mov r9b, 0
 	
 	ciclo:
+	
 	vmovups [z], ymm0
 	vmovups xmm3, [z+16]
 	vmovups [z+3], ymm1
 	vmovups [z+16], xmm3
 	vmovups [z+19], xmm1
-	VPSLLQ ymm2, ymm2, 3
+	VPSLLDQ ymm2, ymm2, 3
+	vpor ymm2, ymm2, [z]
+	VPSRLDQ ymm0, ymm0, 3
 	
-	;_escalado:
+	inc r9b
+	cmp r9b, 5
+	jl ciclo
 	
+	vmovups [rcx], ymm2
+	vmovups xmm1, [rcx]
+	vmovups xmm2, [rcx+16]
+	vmovups [rcx], xmm2
+	vmovups [rcx+15], xmm1
 	
+	_escalado:
+	
+	ret
 	
