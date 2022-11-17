@@ -1,5 +1,6 @@
 #include "menu.h"
 #include "ui_menu.h"
+#include <iostream>
 
 Menu::Menu(QWidget *parent)
     : QMainWindow(parent)
@@ -8,12 +9,12 @@ Menu::Menu(QWidget *parent)
     ui->setupUi(this);
 
     //carga la imagen base en original.
-    QString url = R"(C:\Users\c08195\Desktop\koala.bmp)";
+    QString url = R"(C:\Users\porgois\Desktop\koala.bmp)";
     QPixmap img(url);
     ui->porg->setPixmap(img); //usar setPixmap para cambiar la imagen.
 
     //carga la imagen "blank" en editada.
-    QString orl = R"(C:\Users\c08195\Desktop\blank.bmp)";
+    QString orl = R"(C:\Users\porgois\Desktop\blank.bmp)";
     QPixmap imag(orl);
     ui->nev->setPixmap(imag); //usar setPixmap para cambiar la imagen.
 }
@@ -25,14 +26,15 @@ Menu::~Menu()
 
 void Menu::on_b_negativo_clicked()
 {
-    QString url = R"(C:\Users\c08195\Desktop\koala_negativo.bmp)"; //carga la imagen generada por el programa C++ y NASM.
+    std::cout<<"Negativo\n";
+    QString url = R"(C:\Users\porgois\Desktop\koala_negativo.bmp)"; //carga la imagen generada por el programa C++ y NASM.
     QPixmap img(url);
     ui->nev->setPixmap(img); //usar setPixmap para cambiar la imagen.
 }
 
 void Menu::on_b_borrar_clicked()
 {
-    QString orl = R"(C:\Users\c08195\Desktop\blank.bmp)";
+    QString orl = R"(C:\Users\porgois\Desktop\blank.bmp)";
     QPixmap imag(orl);
     ui->nev->setPixmap(imag); //usar setPixmap para cambiar la imagen.
 }
