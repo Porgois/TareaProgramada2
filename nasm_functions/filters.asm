@@ -82,6 +82,7 @@ section .text
 	vmovups xmm2, [rcx+16]
 	vmovups [rcx], xmm2
 	vmovups [rcx+15], xmm1
+	ret
 	
 	_escalado:
 	
