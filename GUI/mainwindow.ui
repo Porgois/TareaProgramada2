@@ -6,22 +6,125 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>838</width>
-    <height>557</height>
+    <width>1044</width>
+    <height>711</height>
    </rect>
+  </property>
+  <property name="palette">
+   <palette>
+    <active>
+     <colorrole role="Button">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Text">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>86</red>
+        <green>88</green>
+        <blue>90</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </active>
+    <inactive>
+     <colorrole role="Button">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>64</red>
+        <green>65</green>
+        <blue>66</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Text">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>208</red>
+        <green>208</green>
+        <blue>208</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>46</red>
+        <green>47</green>
+        <blue>48</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </inactive>
+    <disabled>
+     <colorrole role="Button">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Text">
+      <brush brushstyle="SolidPattern">
+       <color alpha="96">
+        <red>164</red>
+        <green>166</green>
+        <blue>168</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>86</red>
+        <green>88</green>
+        <blue>90</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </disabled>
+   </palette>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="negative">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>450</y>
+      <x>230</x>
+      <y>610</y>
       <width>121</width>
       <height>51</height>
      </rect>
+    </property>
+    <property name="palette">
+     <palette>
+      <active/>
+      <inactive/>
+      <disabled/>
+     </palette>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 9pt &quot;Consolas&quot;;
+
+</string>
     </property>
     <property name="text">
      <string>Negativo</string>
@@ -30,11 +133,14 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>130</y>
-      <width>200</width>
-      <height>200</height>
+      <x>40</x>
+      <y>90</y>
+      <width>450</width>
+      <height>450</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
     </property>
     <property name="text">
      <string/>
@@ -43,10 +149,10 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>530</x>
-      <y>130</y>
-      <width>200</width>
-      <height>200</height>
+      <x>550</x>
+      <y>90</y>
+      <width>450</width>
+      <height>450</height>
      </rect>
     </property>
     <property name="text">
@@ -56,11 +162,21 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>450</y>
+      <x>550</x>
+      <y>610</y>
       <width>121</width>
       <height>51</height>
      </rect>
+    </property>
+    <property name="palette">
+     <palette>
+      <active/>
+      <inactive/>
+      <disabled/>
+     </palette>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 9pt &quot;Consolas&quot;;</string>
     </property>
     <property name="text">
      <string>Brillo</string>
@@ -69,11 +185,21 @@
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>450</y>
+      <x>390</x>
+      <y>610</y>
       <width>121</width>
       <height>51</height>
      </rect>
+    </property>
+    <property name="palette">
+     <palette>
+      <active/>
+      <inactive/>
+      <disabled/>
+     </palette>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 9pt &quot;Consolas&quot;;</string>
     </property>
     <property name="text">
      <string>Contraste</string>
@@ -82,11 +208,25 @@
    <widget class="QPushButton" name="pushButton_4">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>450</y>
+      <x>710</x>
+      <y>610</y>
       <width>121</width>
       <height>51</height>
      </rect>
+    </property>
+    <property name="palette">
+     <palette>
+      <active/>
+      <inactive/>
+      <disabled/>
+     </palette>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 9pt &quot;Consolas&quot;;
+
+
+
+</string>
     </property>
     <property name="text">
      <string>Escalado</string>
@@ -96,77 +236,161 @@
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>340</y>
-      <width>41</width>
-      <height>21</height>
+      <y>60</y>
+      <width>181</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true"/>
+     <string notr="true">font: 16pt &quot;Consolas&quot;;
+color:rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Original</string>
+     <string>Imagen Original</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>620</x>
-      <y>340</y>
-      <width>31</width>
-      <height>16</height>
+      <x>690</x>
+      <y>60</y>
+      <width>171</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true"/>
+     <string notr="true">font: 16pt &quot;Consolas&quot;;
+color:rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Filtro</string>
+     <string>Imagen Editada</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>30</y>
-      <width>81</width>
+      <x>20</x>
+      <y>20</y>
+      <width>71</width>
       <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 700 22pt &quot;Arial&quot;;</string>
+     <string notr="true">font: 22pt &quot;Consolas&quot;;
+text-decoration: underline;
+font: 700 20pt &quot;Consolas&quot;;
+color:rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Menú</string>
+     <string>Menu</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_5">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>450</y>
+      <x>870</x>
+      <y>610</y>
       <width>121</width>
       <height>51</height>
      </rect>
+    </property>
+    <property name="palette">
+     <palette>
+      <active/>
+      <inactive/>
+      <disabled/>
+     </palette>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 9pt &quot;Consolas&quot;;</string>
     </property>
     <property name="text">
      <string>Espejado</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="leer">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>610</y>
+      <width>121</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="palette">
+     <palette>
+      <active/>
+      <inactive/>
+      <disabled/>
+     </palette>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 9pt &quot;Consolas&quot;;
+</string>
+    </property>
+    <property name="text">
+     <string>Leer Imagen</string>
+    </property>
+   </widget>
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>420</y>
-      <width>141</width>
-      <height>21</height>
+      <x>70</x>
+      <y>560</y>
+      <width>411</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+     <string notr="true">font: 16pt &quot;Consolas&quot;;
+color:rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Seleccione un filtro:</string>
+     <string>Seleccione un filtro para aplicar:</string>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>90</y>
+      <width>450</width>
+      <height>450</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(255, 255, 255);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>5</number>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frame_2">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>90</y>
+      <width>450</width>
+      <height>450</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(255, 255, 255);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>5</number>
     </property>
    </widget>
   </widget>
@@ -175,12 +399,11 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>838</width>
+     <width>1044</width>
      <height>21</height>
     </rect>
    </property>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

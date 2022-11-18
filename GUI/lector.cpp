@@ -24,7 +24,7 @@ void random(int height, int width) //creates an image with random colors.
 //Este es un algoritmo de prueba.
 void negative(std::vector<char>& pixeles) //creates an image with inverted colors.
 {
-    int size = pixeles.size();
+    size_t size = pixeles.size();
     for (int i = 0; i < size; i++) {
         pixeles[i] = 255 - pixeles[i];
     }
@@ -33,7 +33,7 @@ void negative(std::vector<char>& pixeles) //creates an image with inverted color
 //Algoritmos Traduccion.
 void translateNasm(std::vector<char>& pixels, std::vector<Color>& colors)
 {
-    int size = colors.size() * 3;
+    size_t size = colors.size() * 3;
     int counter = 0;
     int tres = 0;
 
@@ -63,7 +63,7 @@ void translateNasm(std::vector<char>& pixels, std::vector<Color>& colors)
 }
 
 void translateCPP(std::vector<char>& pixels, std::vector<Color>& colors) {
-    int size = pixels.size();
+    size_t size = pixels.size();
 
     colors.resize(size / 3);
     int counter = 0;
@@ -110,7 +110,7 @@ void read(std::string path, std::string file_name) {
     image.Import(path + file_name + ".bmp");
     colors = image.getColors();
 
-    int size = (colors.size() * 3);
+    size_t size = (colors.size() * 3);
     pixels.resize(size);
 
     //Traductor para NASM <---> C++.
