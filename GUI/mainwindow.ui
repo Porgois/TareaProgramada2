@@ -102,7 +102,7 @@
    </palette>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Lector</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="negative">
@@ -130,7 +130,7 @@
      <string>Negativo</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="imagen">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -146,7 +146,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="imagen_editada">
     <property name="geometry">
      <rect>
       <x>550</x>
@@ -159,7 +159,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="brightness">
     <property name="geometry">
      <rect>
       <x>550</x>
@@ -182,7 +182,7 @@
      <string>Brillo</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="contrast">
     <property name="geometry">
      <rect>
       <x>390</x>
@@ -205,7 +205,7 @@
      <string>Contraste</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="escale">
     <property name="geometry">
      <rect>
       <x>710</x>
@@ -232,7 +232,7 @@
      <string>Escalado</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="original">
     <property name="geometry">
      <rect>
       <x>180</x>
@@ -249,7 +249,7 @@ color:rgb(255, 255, 255);</string>
      <string>Imagen Original</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QLabel" name="edit">
     <property name="geometry">
      <rect>
       <x>690</x>
@@ -266,7 +266,7 @@ color:rgb(255, 255, 255);</string>
      <string>Imagen Editada</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_5">
+   <widget class="QLabel" name="menu">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -285,7 +285,7 @@ color:rgb(255, 255, 255);</string>
      <string>Menu</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_5">
+   <widget class="QPushButton" name="mirrored">
     <property name="geometry">
      <rect>
       <x>870</x>
@@ -332,7 +332,7 @@ color:rgb(255, 255, 255);</string>
      <string>Leer Imagen</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_6">
+   <widget class="QLabel" name="filtro">
     <property name="geometry">
      <rect>
       <x>70</x>
@@ -349,7 +349,7 @@ color:rgb(255, 255, 255);</string>
      <string>Seleccione un filtro para aplicar:</string>
     </property>
    </widget>
-   <widget class="QFrame" name="frame">
+   <widget class="QFrame" name="marco">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -359,19 +359,20 @@ color:rgb(255, 255, 255);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color:rgb(255, 255, 255);</string>
+     <string notr="true">color:rgb(255, 255, 255);
+</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::Box</enum>
     </property>
     <property name="frameShadow">
-     <enum>QFrame::Plain</enum>
+     <enum>QFrame::Raised</enum>
     </property>
     <property name="lineWidth">
      <number>5</number>
     </property>
    </widget>
-   <widget class="QFrame" name="frame_2">
+   <widget class="QFrame" name="marco_editada">
     <property name="geometry">
      <rect>
       <x>550</x>
@@ -387,7 +388,7 @@ color:rgb(255, 255, 255);</string>
      <enum>QFrame::Box</enum>
     </property>
     <property name="frameShadow">
-     <enum>QFrame::Plain</enum>
+     <enum>QFrame::Sunken</enum>
     </property>
     <property name="lineWidth">
      <number>5</number>
