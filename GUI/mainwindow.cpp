@@ -4,6 +4,9 @@
 #include "lector.cpp"
 #include <QInputDialog>
 
+#include <QFileDialog>
+
+
 std::string path, name, full_name, edited_name;
 
 MainWindow::MainWindow(QWidget *parent)
@@ -20,18 +23,20 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_leer_clicked()
 {
-   //creates variables path and name for future use.
-   QString Qpath = QInputDialog::getText(this, " ", "Enter path:");
-   path = Qpath.toStdString();
+   QString file_name = QFileDialog::getOpenFileName(this, tr(""), "C://", "Image File (*.BMP)");
+   size_t found_slash, found_dot;
 
-   QString Qname = QInputDialog::getText(this, " ", "Enter name:");
-   name = Qname.toStdString();
+   std::string full_path = file_name.toStdString();
+   found_slash = full_path.find_last_of("/\\");
 
-   //sets full_name.
-   full_name = path + name + ".bmp";
+   //get path and name substring from "full_path"
+   path = full_path.substr(0, found_slash) + "/";
+   name = full_path.substr(found_slash+1);
+   found_dot = name.find_last_of(".");
+   name = name.substr(0, found_dot);
 
    //display the image read.
-   QString url = full_name.c_str();
+   QString url = file_name;
    QPixmap img(url);
    ui->imagen->setPixmap(img);
 
@@ -46,7 +51,6 @@ void MainWindow::on_negative_clicked()
 
     //sets filter image to the edited one.
     edited_name = path + name + "_edited.bmp";
-    std::cout << "edited name: " << edited_name << std::endl;
 
     //displays the edited image.
     QString url1 = edited_name.c_str();
@@ -58,5 +62,4 @@ void MainWindow::on_negative_clicked()
 
 }
 
-//Ejemplo PATH: C:/Users/porgois/Desktop/ (nombre de archivo sin extension)
 
