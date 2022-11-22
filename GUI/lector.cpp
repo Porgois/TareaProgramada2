@@ -6,7 +6,6 @@
 
 //VARIABLES PARA COMUNICACION CON ENSAMBLADOR
 std::vector<char> pixels;
-char pixeles[32];
 
 //VARIABLES EXTERNAS
 std::vector<Color> vacio;
@@ -117,13 +116,6 @@ void apply_negative(std::string path, std::string file_name){
     image.Export(path  + file_name + "_edited.bmp");
 }
 
-//divide el vector pixels grande a uno de 32 bytes llamado pixeles. [implementacion conceptual]
-void toNasm(int index){
-    for(int i = index; i < 32; ++i){
-        pixeles[i] = pixels[i];
-    }
-}
-
 //Lee la imagen y ejecuta los algoritmos principales.
 Image read(std::string path, std::string file_name) {
 
@@ -142,9 +134,6 @@ Image read(std::string path, std::string file_name) {
 }
 
 /*
-path base para ir a escritorio:
-C:/Users/porgois/Desktop/ [luego digitar nombre de archivo (sin extension)]
-
 Referencias:
 1) https://www.youtube.com/watch?v=vqT5j38bWGg&ab_channel=DesignedbyHugo
 2) https://www.youtube.com/watch?v=NcEE5xmpgQ0&t=56s&ab_channel=DesignedbyHugo

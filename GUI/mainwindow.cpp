@@ -62,4 +62,9 @@ void MainWindow::on_negative_clicked()
     ui->imagen_editada->setAlignment(Qt::AlignCenter);
 }
 
+/*
+Referencias:
+1) "Qt Tutorials For Beginners 23 - QFileDialog", ProgrammingKnowledge:
+https://www.youtube.com/watch?v=Fgt4WWdn3Ko&ab_channel=ProgrammingKnowledge
+*/
 
