@@ -3,9 +3,7 @@
 #include <iostream>
 #include "lector.cpp"
 #include <QInputDialog>
-
 #include <QFileDialog>
-
 
 std::string path, name, full_name, edited_name;
 
@@ -35,6 +33,9 @@ void MainWindow::on_leer_clicked()
    found_dot = name.find_last_of(".");
    name = name.substr(0, found_dot);
 
+   //read the image specificied by path and name.
+   read(path, name);
+
    //display the image read.
    QString url = file_name;
    QPixmap img(url);
@@ -46,11 +47,11 @@ void MainWindow::on_leer_clicked()
 
 void MainWindow::on_negative_clicked()
 {
-    //c++ function to interpret and edit image at path/name.bmp.
-    read(path, name);
+    //c++ function to edit image at path/name.bmp.
+    apply_negative(path, name);
 
     //sets filter image to the edited one.
-    edited_name = path + name + "_edited.bmp";
+    edited_name = path + name + "_edited.BMP";
 
     //displays the edited image.
     QString url1 = edited_name.c_str();
@@ -59,7 +60,6 @@ void MainWindow::on_negative_clicked()
 
     //Align Image to center.
     ui->imagen_editada->setAlignment(Qt::AlignCenter);
-
 }
 
 
