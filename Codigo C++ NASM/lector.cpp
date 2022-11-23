@@ -1,16 +1,20 @@
-#pragma once
 #include "Image.h"
-#include <iostream>
 #include <string>
 #include <vector>
+#include <iostream>
 
 //VARIABLES PARA COMUNICACION CON ENSAMBLADOR
 std::vector<char> pixels;
-char pixeles[32];
+int brillo_num = 0;
+int iteraciones = 0;
+//por algun motivo que alguien me tiene que explicar, el orden de esta mierda es importante. Si le pone el iteraciones arriba de cualquier otra variable (parece que es la de brillo_num), se va a la absoluta basura.
 
 //VARIABLES EXTERNAS
 std::vector<Color> vacio;
+std::string path, file_name;
 Image image;
+
+extern "C" void auxBrillo();
 
 //Algoritmo para generar imagen "aleatoria".
 void random(int height, int width) //creates an image with random colors.
@@ -19,7 +23,7 @@ void random(int height, int width) //creates an image with random colors.
 
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            image.SetColor(Color({255,0,0}), x, y);
+            image.SetColor(Color({ 255,0,0 }), x, y);
         }
     }
     image.Export("C:/Users/porgois/Desktop/papita.bmp");
@@ -28,7 +32,7 @@ void random(int height, int width) //creates an image with random colors.
 //Este es un algoritmo de prueba.
 void negative(std::vector<char>& pixeles) //creates an image with inverted colors.
 {
-    size_t size = pixeles.size();
+    int size = pixeles.size();
     for (int i = 0; i < size; i++) {
         pixeles[i] = 255 - pixeles[i];
     }
@@ -37,73 +41,86 @@ void negative(std::vector<char>& pixeles) //creates an image with inverted color
 //Algoritmos Traduccion.
 void translateNasm(std::vector<char>& pixels, std::vector<Color>& colors)
 {
-    size_t size = colors.size() * 3;
+    int size = colors.size() * 3;
     int counter = 0;
     int tres = 0;
-
-    std::cout << "Creando arreglo integers...\n";
-
+ 
     for (int i = 0; i < size; i++)
     {
         switch (tres)
         {
-            case 0:
-                pixels[i] = static_cast<char>(colors[counter].r);
-                tres++;
-                break;
-            case 1:
-                pixels[i] = static_cast<char>(colors[counter].g);
-                tres++;
-                break;
-            case 2:
-                pixels[i] = static_cast<char>(colors[counter].b);
-                counter++;
-                tres = 0;
-                break;
+        case 0:
+            pixels[i] = static_cast<char>(colors[counter].r);
+            tres++;
+            break;
+        case 1:
+            pixels[i] = static_cast<char>(colors[counter].g);
+            tres++;
+            break;
+        case 2:
+            pixels[i] = static_cast<char>(colors[counter].b);
+            counter++;
+            tres = 0;
+            break;
         }
     }
-
-    std::cout << "Arreglo creado!\n";
 }
 
 void translateCPP(std::vector<char>& pixels, std::vector<Color>& colors) {
-    size_t size = pixels.size();
+    int size = pixels.size();
 
     colors.resize(size / 3);
     int counter = 0;
     int tres = 0;
 
-    std::cout << "Creando vector colores...\n";
-
     for (int i = 0; i < size; ++i) {
         switch (tres) {
-            case(0):
-                colors[counter].r = static_cast<float>(pixels[i]);
-                tres++;
-                break;
-            case(1):
-                colors[counter].g = static_cast<float>(pixels[i]);
-                tres++;
-                break;
-            case(2):
-                colors[counter].b = static_cast<float>(pixels[i]);
-                tres = 0;
-                counter++;
+        case(0):
+            colors[counter].r = static_cast<float>(pixels[i]);
+            tres++;
+            break;
+        case(1):
+            colors[counter].g = static_cast<float>(pixels[i]);
+            tres++;
+            break;
+        case(2):
+            colors[counter].b = static_cast<float>(pixels[i]);
+            tres = 0;
+            counter++;
         }
     }
-    std::cout << "Vector creado!" << "\n";
 }
 
 //Preguta ruta y nombre de archivo.
-void ask(std::string* path, std::string* file_name) {
+void ask() {
     std::cout << "Enter path: ";
-    std::cin >> *path;
+    std::cin >> path;
 
     std::cout << "Enter file name: ";
-    std::cin >> *file_name;
+    std::cin >> file_name;
 }
 
-void apply_negative(std::string path, std::string file_name){
+//Filtros y Transformaciones.
+void apply_brillo(int brillo) {
+
+    brillo_num = brillo;
+
+    //Traductor para NASM <---> C++.
+    translateNasm(pixels, image.getColors());
+
+    auxBrillo();
+
+    //Traductor para C++ <---> NASM.
+    translateCPP(pixels, vacio);
+    
+    //Apply new colors to image
+    image.getColors() = vacio;
+
+    //Export image with  newly-edited colors
+    image.Export(path + file_name + "_brillo.BMP");
+}
+
+void apply_negative() {
     //Filtro (Esto va en NASM)
     negative(pixels);
 
@@ -114,17 +131,10 @@ void apply_negative(std::string path, std::string file_name){
     image.getColors() = vacio;
 
     //Export image with  newly-edited colors
-    image.Export(path  + file_name + "_edited.bmp");
+    image.Export(path + file_name + "_edited.bmp");
 }
 
-//divide el vector pixels grande a uno de 32 bytes llamado pixeles. [implementacion conceptual]
-void toNasm(int index){
-    for(int i = index; i < 32; ++i){
-        pixeles[i] = pixels[i];
-    }
-}
-
-//Lee la imagen y ejecuta los algoritmos principales.
+//Lee la imagen.
 Image read(std::string path, std::string file_name) {
 
     std::vector<Color> colors;
@@ -132,15 +142,22 @@ Image read(std::string path, std::string file_name) {
     image.Import(path + file_name + ".bmp");
     colors = image.getColors();
 
-    size_t size = (colors.size() * 3);
+    int size = (colors.size() * 3);
     pixels.resize(size);
 
     //Traductor para NASM <---> C++.
     translateNasm(pixels, colors);
 
+    //Calcular iteraciones para ensamblador.
+    iteraciones = (size / 32);
+    
     return image;
 }
 
+int main(){
+    read("C:/Users/porgois/Desktop/","red");
+    apply_brillo(120);
+}
 /*
 path base para ir a escritorio:
 C:/Users/porgois/Desktop/ [luego digitar nombre de archivo (sin extension)]

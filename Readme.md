@@ -13,7 +13,7 @@ Para hacer el proyecto, es necesario utilizar el modelo SIMD y el conjunto de in
 Descripcion Requisitos:
 1.	Abrir un archivo y cargar los pixeles a un vector de memoria para ser alterados.
 2.	Ajustar el brillo (sumar número constante a todos los pixeles con las instrucciones AVX2).
-3.	Contraste (por determinar)
+3.	Contraste, se va a usar la funcion del profesor.
 4.	Colores negativos, básicamente implicaría reemplazar cada pixel individual (R, G ,B) por el pixel (255-R, 255- G, 255-B) respectivo.
 5.	Escalado de la imagen, se tendría que cuadruplicar el tamaño de la imagen, duplicar su dimensión en "X" y en "Y" para luego hacer una reubicación y respectiva copia de cada pixel adyacente en los nuevos espacios vacíos.
 6.	Espejado de la imagen, se debe reubicar cada pixel en orden inverso en términos de su dimensión "X", esto implica mover los pixeles finales de la imagen por cada hilera hacia el frente de la misma.
@@ -34,20 +34,22 @@ Un botón para generar/guardar la imagen.
 
 **Tareas (por definir):**
 
-1) Implementar Lectura/Escritura Imagenes BMP C++. ( Isaac ) - Completada
-2) Menu Basico Ensamblador. ( Isaac ) - Por Completar
-3) Conectar C++ con Ensamblador ( NASM ). (-)
-4) Elaborar Interfaz Grafica. ( Nathan/Isaac [Elaborado en clase] )
-5) Programar Algoritmos ( Negativo, Contraste, Brillo, Escalado...etc. ). (-)
-
+1) Implementar Lectura/Escritura Imagenes BMP C++. ( Isaac ) 
+2) Menu Basico Ensamblador. ( Isaac ) 
+3) Conectar C++ con Ensamblador ( NASM ). ( Isaac & Nathan )
+4) Elaborar Interfaz Grafica. ( Isaac & Nathan [Elaborado en clase] )
+5) Programar Algoritmos ( Negativo, Contraste, Brillo, Escalado...etc. ). ( Isaac (Subir Brillo) )
 
 **Referencias:**
-
 1) "Reading a Bitmap Image (.bmp) using C++ | Tutorial" - Designed by Hugo:
 https://www.youtube.com/watch?v=NcEE5xmpgQ0&t=56s&ab_channel=DesignedbyHugo
 
 2) "Creating a Bitmap Image (.bmp) using C++ | Tutorial" - Designed by Hugo:
 https://www.youtube.com/watch?v=vqT5j38bWGg&t=1s&ab_channel=DesignedbyHugo
+
+3) "QT C++ GUI Tutorial 24- How to use QFileDialog" - ProgrammingKnowledge:
+https://www.youtube.com/watch?v=tKdfpA74HYY&t=499s&ab_channel=ProgrammingKnowledge
+
 
 
 

@@ -233,7 +233,3 @@ std::vector<Color>& Image::getColors()
 {
     return m_colors;
 }
-
-//Referencias:
-//1) https://www.youtube.com/watch?v=vqT5j38bWGg&ab_channel=DesignedbyHugo
-//2) https://www.youtube.com/watch?v=NcEE5xmpgQ0&t=56s&ab_channel=DesignedbyHugo
