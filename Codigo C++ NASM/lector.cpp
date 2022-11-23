@@ -14,7 +14,7 @@ std::vector<Color> vacio;
 std::string path, file_name;
 Image image;
 
-extern "C" void auxBrillo();
+extern "C" void Brillo();
 
 //Algoritmo para generar imagen "aleatoria".
 void random(int height, int width) //creates an image with random colors.
@@ -108,7 +108,7 @@ void apply_brillo(int brillo) {
     //Traductor para NASM <---> C++.
     translateNasm(pixels, image.getColors());
 
-    auxBrillo();
+    Brillo();
 
     //Traductor para C++ <---> NASM.
     translateCPP(pixels, vacio);
