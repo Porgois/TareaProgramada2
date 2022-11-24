@@ -15,6 +15,8 @@ std::string path, file_name;
 Image image;
 
 extern "C" void Brillo();
+extern "C" void Negativo();
+extern "C" void Contrast();
 
 //Algoritmo para generar imagen "aleatoria".
 void random(int height, int width) //creates an image with random colors.
@@ -29,6 +31,7 @@ void random(int height, int width) //creates an image with random colors.
     image.Export("C:/Users/porgois/Desktop/papita.bmp");
 }
 
+/* Esto hay que borrarlo
 //Este es un algoritmo de prueba.
 void negative(std::vector<char>& pixeles) //creates an image with inverted colors.
 {
@@ -37,6 +40,7 @@ void negative(std::vector<char>& pixeles) //creates an image with inverted color
         pixeles[i] = 255 - pixeles[i];
     }
 }
+*/
 
 //Algoritmos Traduccion.
 void translateNasm(std::vector<char>& pixels, std::vector<Color>& colors)
@@ -121,8 +125,28 @@ void apply_brillo(int brillo) {
 }
 
 void apply_negative() {
-    //Filtro (Esto va en NASM)
-    negative(pixels);
+
+    //Traductor para NASM <---> C++.
+    translateNasm(pixels, image.getColors());
+
+    Negativo();
+
+    //Traductor para C++ <---> NASM.
+    translateCPP(pixels, vacio);
+
+    //Apply new colors to image
+    image.getColors() = vacio;
+
+    //Export image with  newly-edited colors
+    image.Export(path + file_name + "_edited.bmp");
+}
+
+void apply_contrast() {
+
+    //Traductor para NASM <---> C++.
+    translateNasm(pixels, image.getColors());
+
+    Contrast();
 
     //Traductor para C++ <---> NASM.
     translateCPP(pixels, vacio);
@@ -155,7 +179,7 @@ Image read(std::string path, std::string file_name) {
 }
 
 int main(){
-    read("C:/Users/porgois/Desktop/","red");
+    read("C:/Users/porgois/Desktop/", "red");
     apply_brillo(120);
 }
 /*

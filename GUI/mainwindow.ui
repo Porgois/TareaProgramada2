@@ -269,20 +269,18 @@ color:rgb(255, 255, 255);</string>
    <widget class="QLabel" name="menu">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>20</y>
+      <x>40</x>
+      <y>10</y>
       <width>71</width>
       <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 22pt &quot;Consolas&quot;;
-text-decoration: underline;
-font: 700 20pt &quot;Consolas&quot;;
+     <string notr="true">font: 700 20pt &quot;Consolas&quot;;
 color:rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Menu</string>
+     <string>Menú</string>
     </property>
    </widget>
    <widget class="QPushButton" name="mirrored">

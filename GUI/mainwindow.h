@@ -19,6 +19,10 @@ private slots:
     void on_negative_clicked();
     void on_leer_clicked();
 
+    void on_brightness_clicked();
+
+    void on_contrast_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
