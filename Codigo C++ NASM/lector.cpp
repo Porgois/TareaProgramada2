@@ -14,12 +14,13 @@ std::vector<Color> vacio;
 std::string path, file_name;
 Image image;
 
-extern "C" void Brillo();
+extern "C" void BrilloAdd();
+extern "C" void BrilloSub();
 extern "C" void Negativo();
-extern "C" void Contrast();
+extern "C" void Contraste();
 
 //Algoritmo para generar imagen "aleatoria".
-void random(int height, int width) //creates an image with random colors.
+void random(int height, int width) 
 {
     Image image(width, height);
 
@@ -30,17 +31,6 @@ void random(int height, int width) //creates an image with random colors.
     }
     image.Export("C:/Users/porgois/Desktop/papita.bmp");
 }
-
-/* Esto hay que borrarlo
-//Este es un algoritmo de prueba.
-void negative(std::vector<char>& pixeles) //creates an image with inverted colors.
-{
-    int size = pixeles.size();
-    for (int i = 0; i < size; i++) {
-        pixeles[i] = 255 - pixeles[i];
-    }
-}
-*/
 
 //Algoritmos Traduccion.
 void translateNasm(std::vector<char>& pixels, std::vector<Color>& colors)
@@ -105,14 +95,14 @@ void ask() {
 }
 
 //Filtros y Transformaciones.
-void apply_brillo(int brillo) {
+void apply_brilloAdd(int brillo) {
 
     brillo_num = brillo;
 
     //Traductor para NASM <---> C++.
     translateNasm(pixels, image.getColors());
 
-    Brillo();
+    BrilloAdd();
 
     //Traductor para C++ <---> NASM.
     translateCPP(pixels, vacio);
@@ -121,7 +111,26 @@ void apply_brillo(int brillo) {
     image.getColors() = vacio;
 
     //Export image with  newly-edited colors
-    image.Export(path + file_name + "_brillo.BMP");
+    image.Export(path + file_name + "_brilloAdd.BMP");
+}
+
+void apply_brilloSub(int brillo) {
+
+    brillo_num = brillo;
+
+    //Traductor para NASM <---> C++.
+    translateNasm(pixels, image.getColors());
+
+    BrilloSub();
+
+    //Traductor para C++ <---> NASM.
+    translateCPP(pixels, vacio);
+
+    //Apply new colors to image
+    image.getColors() = vacio;
+
+    //Export image with  newly-edited colors
+    image.Export(path + file_name + "_brilloSub.BMP");
 }
 
 void apply_negative() {
@@ -138,7 +147,7 @@ void apply_negative() {
     image.getColors() = vacio;
 
     //Export image with  newly-edited colors
-    image.Export(path + file_name + "_edited.bmp");
+    image.Export(path + file_name + "_negative.bmp");
 }
 
 void apply_contrast() {
@@ -146,7 +155,7 @@ void apply_contrast() {
     //Traductor para NASM <---> C++.
     translateNasm(pixels, image.getColors());
 
-    Contrast();
+    Contraste();
 
     //Traductor para C++ <---> NASM.
     translateCPP(pixels, vacio);
@@ -155,7 +164,7 @@ void apply_contrast() {
     image.getColors() = vacio;
 
     //Export image with  newly-edited colors
-    image.Export(path + file_name + "_edited.bmp");
+    image.Export(path + file_name + "_contrast.bmp");
 }
 
 //Lee la imagen.
@@ -179,8 +188,9 @@ Image read(std::string path, std::string file_name) {
 }
 
 int main(){
-    read("C:/Users/porgois/Desktop/", "red");
-    apply_brillo(120);
+
+    read("C:/Users/porgois/Desktop/", "sample");
+    apply_brilloSub(50);
 }
 /*
 path base para ir a escritorio:
