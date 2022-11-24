@@ -5,7 +5,8 @@
 #include <QInputDialog>
 #include <QFileDialog>
 
-std::string path, name, full_name, edited_name;
+
+std::string name, full_name, edited_name;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -33,7 +34,7 @@ void MainWindow::on_leer_clicked()
    found_dot = name.find_last_of(".");
    name = name.substr(0, found_dot);
 
-   //read the image specificied by path and name.
+   //read the image specified by path and name.
    read(path, name);
 
    //display the image read.
@@ -43,12 +44,25 @@ void MainWindow::on_leer_clicked()
 
    //Align Image to center.
    ui->imagen->setAlignment(Qt::AlignCenter);
+
+   //Scale Image.
+   ui->imagen->setScaledContents(true);
+
 }
 
 void MainWindow::on_negative_clicked()
 {
-    //c++ function to edit image at path/name.bmp.
+
     apply_negative(path, name);
+
+    //Traductor para C++ <---> NASM.
+    translateCPP(pixels, vacio);
+
+    //Apply new colors to image
+    image.getColors() = vacio;
+
+    //Export image with  newly-edited colors
+    image.Export(path + file_name + "_edited.BMP");
 
     //sets filter image to the edited one.
     edited_name = path + name + "_edited.BMP";
@@ -60,17 +74,50 @@ void MainWindow::on_negative_clicked()
 
     //Align Image to center.
     ui->imagen_editada->setAlignment(Qt::AlignCenter);
+
+    //Scale Image.
+    ui->imagen_editada->setScaledContents(true);
 }
 
 void MainWindow::on_brightness_clicked()
 {
+    //c++ function to edit image at path/name.bmp.
+    apply_brilloAdd(path, name, 50);
 
+    //sets filter image to the edited one.
+    edited_name = path + name + "_edited.BMP";
+
+    //displays the edited image.
+    QString url1 = edited_name.c_str();
+    QPixmap img1(url1);
+    ui->imagen_editada->setPixmap(img1);
+
+    //Align Image to center.
+    ui->imagen_editada->setAlignment(Qt::AlignCenter);
+
+    //Scale Image.
+    ui->imagen_editada->setScaledContents(true);
 }
 
 
 void MainWindow::on_contrast_clicked()
 {
+    //c++ function to edit image at path/name.bmp.
+    apply_contrast(path, name);
 
+    //sets filter image to the edited one.
+    edited_name = path + name + "_edited.BMP";
+
+    //displays the edited image.
+    QString url1 = edited_name.c_str();
+    QPixmap img1(url1);
+    ui->imagen_editada->setPixmap(img1);
+
+    //Align Image to center.
+    ui->imagen_editada->setAlignment(Qt::AlignCenter);
+
+    //Scale Image.
+    ui->imagen_editada->setScaledContents(true);
 }
 
 /*
