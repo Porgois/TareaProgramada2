@@ -159,7 +159,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="brightness">
+   <widget class="QPushButton" name="brightnessPlus">
     <property name="geometry">
      <rect>
       <x>550</x>
@@ -179,7 +179,7 @@
      <string notr="true">font: 9pt &quot;Consolas&quot;;</string>
     </property>
     <property name="text">
-     <string>Brillo</string>
+     <string>Agregar Brillo</string>
     </property>
    </widget>
    <widget class="QPushButton" name="contrast">
@@ -203,33 +203,6 @@
     </property>
     <property name="text">
      <string>Contraste</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="escale">
-    <property name="geometry">
-     <rect>
-      <x>710</x>
-      <y>610</y>
-      <width>121</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="palette">
-     <palette>
-      <active/>
-      <inactive/>
-      <disabled/>
-     </palette>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font: 9pt &quot;Consolas&quot;;
-
-
-
-</string>
-    </property>
-    <property name="text">
-     <string>Escalado</string>
     </property>
    </widget>
    <widget class="QLabel" name="original">
@@ -392,6 +365,62 @@ color:rgb(255, 255, 255);</string>
      <number>5</number>
     </property>
    </widget>
+   <widget class="QSpinBox" name="spinBox">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>570</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>255</number>
+    </property>
+    <property name="value">
+     <number>50</number>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="brightnessLess">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>610</y>
+      <width>121</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="palette">
+     <palette>
+      <active/>
+      <inactive/>
+      <disabled/>
+     </palette>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 9pt &quot;Consolas&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Reducir Brillo</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>550</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 8pt &quot;Consolas&quot;;
+color:rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Cantidad de Brillo:</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -399,7 +428,7 @@ color:rgb(255, 255, 255);</string>
      <x>0</x>
      <y>0</y>
      <width>1044</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

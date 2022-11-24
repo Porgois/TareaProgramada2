@@ -18,10 +18,12 @@ section .bss
 section .text
 
 ;----------Inicializacion------------.
-	inicializar: 
+        inicializar: ;limpia todas las variables necesarias.
             mov rcx, [pixels] ;se mueve el vector de chars "pixels" para ser editado.
             xor r8, r8
             xor r9, r9 ;a r9 se le suma 32 bytes cada iteracion (offset).
+            xor r10, r10
+            xor r11, r11
             mov r8, [iteraciones] ;para ver cuantas veces tiene que correr el loop.
             ret
 
@@ -78,8 +80,8 @@ section .text
 	
 	Negativo:
 		call inicializar
-		mov r8b, 255
-		mov [neg], r8b
+                mov r11b, 255
+                mov [neg], r11b
 		jmp loopNegativo
 
 	loopNegativo:
@@ -103,10 +105,10 @@ section .text
 		
 	Contraste:
 		call inicializar
-		mov r8b, 128
-		mov [con1], r8b
+                mov r11b, 128
+                mov [con1], r11b
 
-		mov r10b, 2
+                mov r10b, 2
 		mov [con2], r10b
 		jmp loopContraste
 		

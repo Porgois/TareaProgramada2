@@ -95,7 +95,7 @@ void ask() {
 }
 
 //Filtros y Transformaciones.
-void apply_brilloAdd(std::string path, std::string file_name, int brillo) {
+void apply_brilloAdd(std::string path, std::string name, int brillo) {
 
     brillo_num = brillo;
 
@@ -110,11 +110,11 @@ void apply_brilloAdd(std::string path, std::string file_name, int brillo) {
     //Apply new colors to image
     image.getColors() = vacio;
 
-    //Export image with  newly-edited colors
-    image.Export(path + file_name + "_edited.BMP");
+    //Export image with newly-edited colors.
+    image.Export(path + name + "_edited.BMP");
 }
 
-void apply_brilloSub(int brillo) {
+void apply_brilloSub(std::string path, std::string name, int brillo) {
 
     brillo_num = brillo;
 
@@ -129,11 +129,11 @@ void apply_brilloSub(int brillo) {
     //Apply new colors to image
     image.getColors() = vacio;
 
-    //Export image with  newly-edited colors
-    image.Export(path + file_name + "_edited.BMP");
+    //Export image with newly-edited colors.
+    image.Export(path + name + "_edited.BMP");
 }
 
-void apply_negative(std::string path, std::string file_name) {
+void apply_negative(std::string path, std::string name) {
 
     //Traductor para NASM <---> C++.
     translateNasm(pixels, image.getColors());
@@ -147,11 +147,11 @@ void apply_negative(std::string path, std::string file_name) {
     //Apply new colors to image
     image.getColors() = vacio;
 
-    //Export image with  newly-edited colors
-    image.Export(path + file_name + "_edited.BMP");
+     //Export image with newly-edited colors.
+    image.Export(path + name + "_edited.BMP");
 }
 
-void apply_contrast(std::string path, std::string file_name) {
+void apply_contrast(std::string path, std::string name) {
 
     //Traductor para NASM <---> C++.
     translateNasm(pixels, image.getColors());
@@ -164,13 +164,14 @@ void apply_contrast(std::string path, std::string file_name) {
     //Apply new colors to image
     image.getColors() = vacio;
 
-    //Export image with  newly-edited colors
-    image.Export(path + file_name + "_edited.BMP");
+    //Export image with newly-edited colors.
+    image.Export(path + name + "_edited.BMP");
 }
 
 //Lee la imagen.
 Image read(std::string path, std::string file_name) {
 
+     //Cleans current image
     std::vector<Color> colors;
 
     image.Import(path + file_name + ".BMP");

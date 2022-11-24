@@ -79,10 +79,14 @@ void MainWindow::on_negative_clicked()
     ui->imagen_editada->setScaledContents(true);
 }
 
-void MainWindow::on_brightness_clicked()
+void MainWindow::on_brightnessPlus_clicked()
 {
+
+    //Sets brillo to SpinBox Value.
+    int brillo = (int)ui->spinBox->value();
+
     //c++ function to edit image at path/name.bmp.
-    apply_brilloAdd(path, name, 50);
+    apply_brilloAdd(path, name, brillo);
 
     //sets filter image to the edited one.
     edited_name = path + name + "_edited.BMP";
@@ -98,7 +102,6 @@ void MainWindow::on_brightness_clicked()
     //Scale Image.
     ui->imagen_editada->setScaledContents(true);
 }
-
 
 void MainWindow::on_contrast_clicked()
 {
@@ -125,3 +128,28 @@ Referencias:
 1) "Qt Tutorials For Beginners 23 - QFileDialog", ProgrammingKnowledge:
 https://www.youtube.com/watch?v=Fgt4WWdn3Ko&ab_channel=ProgrammingKnowledge
 */
+
+void MainWindow::on_brightnessLess_clicked()
+{
+
+    //Sets brillo to SpinBox Value.
+    int brillo = (int)ui->spinBox->value();
+
+    //c++ function to edit image at path/name.bmp.
+    apply_brilloSub(path, name, brillo);
+
+    //sets filter image to the edited one.
+    edited_name = path + name + "_edited.BMP";
+
+    //displays the edited image.
+    QString url1 = edited_name.c_str();
+    QPixmap img1(url1);
+    ui->imagen_editada->setPixmap(img1);
+
+    //Align Image to center.
+    ui->imagen_editada->setAlignment(Qt::AlignCenter);
+
+    //Scale Image.
+    ui->imagen_editada->setScaledContents(true);
+}
+
