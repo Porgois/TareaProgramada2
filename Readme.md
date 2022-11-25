@@ -26,19 +26,16 @@ Un panel para ver la imagen original, a la par otro panel que muestre la copia (
 Un botón para generar/guardar la imagen.
 
 
-
 **Diagrama de Flujo**
 ![Diagrama flujo base](https://user-images.githubusercontent.com/102835455/202092625-3dd26ffb-31aa-4967-ac85-cba172bf663a.png)
 
 
-
-**Tareas (por definir):**
-
-1) Implementar Lectura/Escritura Imagenes BMP C++. ( Isaac ) 
-2) Menu Basico Ensamblador. ( Isaac ) 
-3) Conectar C++ con Ensamblador ( NASM ). ( Isaac & Nathan )
-4) Elaborar Interfaz Grafica. ( Isaac & Nathan [Elaborado en clase] )
-5) Programar Algoritmos ( Negativo, Contraste, Brillo, Escalado...etc. ). ( Isaac (Subir Brillo) )
+**Tareas:**
+1) Implementar Lectura/Escritura Imagenes BMP C++. 
+2) Menu Basico Ensamblador.  
+3) Conectar C++ con Ensamblador.
+4) Elaborar Interfaz Grafica. 
+5) Programar Algoritmos.
 
 **Referencias:**
 1) "Reading a Bitmap Image (.bmp) using C++ | Tutorial" - Designed by Hugo:

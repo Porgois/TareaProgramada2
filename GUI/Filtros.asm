@@ -120,6 +120,10 @@ section .text
 ;----------Espejado---------------.
 
     Espejado:
+		;call inicializar
+		;mov rbx, [pixels + iteraciones - 1] (se determina que tiene que ir en orden inverso).
+		;loop:
+		;la idea es que vaya metiendo lo de rbx en rcx (orden inverso).
          ret
 ;---------------------------------.
 
