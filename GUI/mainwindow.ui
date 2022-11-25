@@ -374,6 +374,10 @@ color:rgb(255, 255, 255);</string>
       <height>31</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">font: 9pt &quot;Consolas&quot;;
+color: rgb(0,0,0);</string>
+    </property>
     <property name="maximum">
      <number>255</number>
     </property>
@@ -421,6 +425,29 @@ color:rgb(255, 255, 255);</string>
      <string>Cantidad de Brillo:</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pochita">
+    <property name="geometry">
+     <rect>
+      <x>960</x>
+      <y>10</y>
+      <width>61</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="palette">
+     <palette>
+      <active/>
+      <inactive/>
+      <disabled/>
+     </palette>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 9pt &quot;Consolas&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Pochita</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -428,7 +455,7 @@ color:rgb(255, 255, 255);</string>
      <x>0</x>
      <y>0</y>
      <width>1044</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

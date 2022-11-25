@@ -3,7 +3,7 @@ QT       += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TEMPLATE = app
-TARGET = input
+TARGET = TareaP2
 CONFIG += c++17
 
 QMAKE_EXTRA_COMPILERS += nasm
@@ -37,5 +37,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    Filtros.asm \
+    Filtros.asm
 

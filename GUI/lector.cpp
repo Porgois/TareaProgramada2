@@ -6,31 +6,20 @@
 //VARIABLES PARA COMUNICACION CON ENSAMBLADOR
 std::vector<char> pixels;
 int brillo_num = 0;
-int iteraciones = 0;
-//orden de las variables importa por algun motivo.
 
 //VARIABLES EXTERNAS
 std::vector<Color> vacio;
-std::string path, file_name;
+std::string path, name;
 Image image;
+
+//Iteraciones (esta variable tiene que ir al final o todo se cae).
+int iteraciones = 0;
 
 extern "C" void BrilloAdd();
 extern "C" void BrilloSub();
 extern "C" void Negativo();
 extern "C" void Contraste();
-
-//Algoritmo para generar imagen "aleatoria".
-void random(int height, int width) 
-{
-    Image image(width, height);
-
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            image.SetColor(Color({ 255,0,0 }), x, y);
-        }
-    }
-    image.Export("C:/Users/porgois/Desktop/papita.bmp");
-}
+extern "C" void Espejado();
 
 //Algoritmos Traduccion.
 void translateNasm(std::vector<char>& pixels, std::vector<Color>& colors)
@@ -85,17 +74,8 @@ void translateCPP(std::vector<char>& pixels, std::vector<Color>& colors) {
     }
 }
 
-//Preguta ruta y nombre de archivo.
-void ask() {
-    std::cout << "Enter path: ";
-    std::cin >> path;
-
-    std::cout << "Enter file name: ";
-    std::cin >> file_name;
-}
-
 //Filtros y Transformaciones.
-void apply_brilloAdd(std::string path, std::string name, int brillo) {
+void apply_brilloAdd(int brillo) {
 
     brillo_num = brillo;
 
@@ -114,7 +94,7 @@ void apply_brilloAdd(std::string path, std::string name, int brillo) {
     image.Export(path + name + "_edited.BMP");
 }
 
-void apply_brilloSub(std::string path, std::string name, int brillo) {
+void apply_brilloSub(int brillo) {
 
     brillo_num = brillo;
 
@@ -133,14 +113,14 @@ void apply_brilloSub(std::string path, std::string name, int brillo) {
     image.Export(path + name + "_edited.BMP");
 }
 
-void apply_negative(std::string path, std::string name) {
+//これは関数を7回繰り返します
+void apply_negative() {
 
     //Traductor para NASM <---> C++.
     translateNasm(pixels, image.getColors());
 
     Negativo();
 
-    std::cout << "negativo aplicado.\n";
     //Traductor para C++ <---> NASM.
     translateCPP(pixels, vacio);
 
@@ -151,7 +131,8 @@ void apply_negative(std::string path, std::string name) {
     image.Export(path + name + "_edited.BMP");
 }
 
-void apply_contrast(std::string path, std::string name) {
+//аюда пор фаворит
+void apply_contrast() {
 
     //Traductor para NASM <---> C++.
     translateNasm(pixels, image.getColors());
@@ -168,13 +149,31 @@ void apply_contrast(std::string path, std::string name) {
     image.Export(path + name + "_edited.BMP");
 }
 
-//Lee la imagen.
-Image read(std::string path, std::string file_name) {
+//nie mogę już tego robić
+void apply_espejado(){
 
-     //Cleans current image
+    //Traductor para NASM <---> C++.
+    translateNasm(pixels, image.getColors());
+
+    Espejado();
+
+    //Traductor para C++ <---> NASM.
+    translateCPP(pixels, vacio);
+
+    //Apply new colors to image
+    image.getColors() = vacio;
+
+    //Export image with newly-edited colors.
+    image.Export(path + name + "_edited.BMP");
+
+}
+
+//Lee la imagen.
+Image read() {
+
     std::vector<Color> colors;
 
-    image.Import(path + file_name + ".BMP");
+    image.Import(path + name + ".BMP");
     colors = image.getColors();
 
     int size = (colors.size() * 3);
@@ -186,14 +185,10 @@ Image read(std::string path, std::string file_name) {
     //Calcular iteraciones para ensamblador.
     iteraciones = (size / 32);
 
-    std::cout << "iteraciones: " << iteraciones << "\n";
     return image;
 }
 
 /*
-path base para ir a escritorio:
-C:/Users/porgois/Desktop/ [luego digitar nombre de archivo (sin extension)]
-
 Referencias:
 1) https://www.youtube.com/watch?v=vqT5j38bWGg&ab_channel=DesignedbyHugo
 2) https://www.youtube.com/watch?v=NcEE5xmpgQ0&t=56s&ab_channel=DesignedbyHugo

@@ -25,6 +25,12 @@ private slots:
 
     void on_brightnessLess_clicked();
 
+    void on_mirrored_clicked();
+
+    void pochita();
+
+    void on_pochita_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

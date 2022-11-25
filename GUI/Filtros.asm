@@ -6,6 +6,7 @@ global BrilloAdd
 global BrilloSub
 global Negativo
 global Contraste
+global Espejado
 
 section .data 
         extern pixels, iteraciones, brillo_num ;esta es la cantidad de brillo.
@@ -16,14 +17,13 @@ section .bss
 	con2: resb 2
 
 section .text
-
 ;----------Inicializacion------------.
-        inicializar: ;limpia todas las variables necesarias.
-            mov rcx, [pixels] ;se mueve el vector de chars "pixels" para ser editado.
-            xor r8, r8
+        inicializar:
+            xor rcx, rcx
             xor r9, r9 ;a r9 se le suma 32 bytes cada iteracion (offset).
-            xor r10, r10
-            xor r11, r11
+            xor r8, r8
+
+            mov rcx, [pixels] ;se mueve el vector de chars "pixels" para ser editado.
             mov r8, [iteraciones] ;para ver cuantas veces tiene que correr el loop.
             ret
 
@@ -69,17 +69,17 @@ section .text
 		
 ;---------Negativo------------.	
 	negative:
-		vmovups ymm0, [rcx + r9]
-		vpbroadcastb ymm1, [neg]
+                vmovups ymm0, [rcx + r9]
+                vpbroadcastb ymm1, [neg]
 		vpsubusb ymm2, ymm1, ymm0
-		vmovups [rcx + r9], ymm2
+                vmovups [rcx + r9], ymm2
 		
 		add r9, byte 32
 		dec r8
 		jmp loopNegativo
 	
 	Negativo:
-		call inicializar
+                call inicializar
                 mov r11b, 255
                 mov [neg], r11b
 		jmp loopNegativo
@@ -118,5 +118,10 @@ section .text
 		jne contrast
 
 ;----------Espejado---------------.
+
+    Espejado:
+         ret
+;---------------------------------.
+
 	terminar:
-                ret
+          ret

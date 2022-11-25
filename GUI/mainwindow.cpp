@@ -5,8 +5,8 @@
 #include <QInputDialog>
 #include <QFileDialog>
 
-
-std::string name, full_name, edited_name;
+std::string full_name, edited_name, full_path;
+size_t found_dot, found_slash;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -20,12 +20,12 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+//Reads the Image
 void MainWindow::on_leer_clicked()
 {
    QString file_name = QFileDialog::getOpenFileName(this, tr(""), "C://", "Image File (*.BMP)");
-   size_t found_slash, found_dot;
 
-   std::string full_path = file_name.toStdString();
+   full_path = file_name.toStdString();
    found_slash = full_path.find_last_of("/\\");
 
    //get path and name substring from "full_path"
@@ -35,7 +35,7 @@ void MainWindow::on_leer_clicked()
    name = name.substr(0, found_dot);
 
    //read the image specified by path and name.
-   read(path, name);
+   read();
 
    //display the image read.
    QString url = file_name;
@@ -48,21 +48,23 @@ void MainWindow::on_leer_clicked()
    //Scale Image.
    ui->imagen->setScaledContents(true);
 
+   //Clean existing image_2:
+   QPixmap img1("");
+   ui->imagen_editada->setPixmap(img1);
+
 }
 
+//Filter Buttons
 void MainWindow::on_negative_clicked()
 {
 
-    apply_negative(path, name);
+    apply_negative();
 
     //Traductor para C++ <---> NASM.
     translateCPP(pixels, vacio);
 
     //Apply new colors to image
     image.getColors() = vacio;
-
-    //Export image with  newly-edited colors
-    image.Export(path + file_name + "_edited.BMP");
 
     //sets filter image to the edited one.
     edited_name = path + name + "_edited.BMP";
@@ -86,7 +88,7 @@ void MainWindow::on_brightnessPlus_clicked()
     int brillo = (int)ui->spinBox->value();
 
     //c++ function to edit image at path/name.bmp.
-    apply_brilloAdd(path, name, brillo);
+    apply_brilloAdd(brillo);
 
     //sets filter image to the edited one.
     edited_name = path + name + "_edited.BMP";
@@ -106,7 +108,7 @@ void MainWindow::on_brightnessPlus_clicked()
 void MainWindow::on_contrast_clicked()
 {
     //c++ function to edit image at path/name.bmp.
-    apply_contrast(path, name);
+    apply_contrast();
 
     //sets filter image to the edited one.
     edited_name = path + name + "_edited.BMP";
@@ -122,12 +124,6 @@ void MainWindow::on_contrast_clicked()
     //Scale Image.
     ui->imagen_editada->setScaledContents(true);
 }
-
-/*
-Referencias:
-1) "Qt Tutorials For Beginners 23 - QFileDialog", ProgrammingKnowledge:
-https://www.youtube.com/watch?v=Fgt4WWdn3Ko&ab_channel=ProgrammingKnowledge
-*/
 
 void MainWindow::on_brightnessLess_clicked()
 {
@@ -136,7 +132,7 @@ void MainWindow::on_brightnessLess_clicked()
     int brillo = (int)ui->spinBox->value();
 
     //c++ function to edit image at path/name.bmp.
-    apply_brilloSub(path, name, brillo);
+    apply_brilloSub(brillo);
 
     //sets filter image to the edited one.
     edited_name = path + name + "_edited.BMP";
@@ -152,4 +148,49 @@ void MainWindow::on_brightnessLess_clicked()
     //Scale Image.
     ui->imagen_editada->setScaledContents(true);
 }
+
+void MainWindow::on_mirrored_clicked()
+{
+}
+
+//Buttons of extreme importance
+void MainWindow::on_pochita_clicked()
+{
+    pochita();
+}
+
+void MainWindow::pochita(){
+    std::string pops;
+    pops = "../GUI/pochita.jpg";
+
+    //displays the edited image for image #1.
+    QPixmap img(pops.c_str());
+    ui->imagen->setPixmap(img);
+
+    //Align Image to center.
+    ui->imagen->setAlignment(Qt::AlignCenter);
+
+    //Scale Image.
+    ui->imagen->setScaledContents(true);
+
+    //displays the edited image for image #2.
+    QPixmap img1(pops.c_str());
+    ui->imagen_editada->setPixmap(img1);
+
+    //Align Image to center.
+    ui->imagen_editada->setAlignment(Qt::AlignCenter);
+
+    //Scale Image.
+    ui->imagen_editada->setScaledContents(true);
+
+
+}
+/*
+Referencias:
+1) "Qt Tutorials For Beginners 23 - QFileDialog", ProgrammingKnowledge:
+https://www.youtube.com/watch?v=Fgt4WWdn3Ko&ab_channel=ProgrammingKnowledge
+*/
+
+
+
 
